@@ -11,34 +11,45 @@ A [Claude Code](https://docs.anthropic.com/en/docs/claude-code) skill that conne
 - **Reads breadcrumbs and context** (browser, OS, user info, request data) to help reproduce issues
 - **Suggests fixes** with code changes and rationale based on the error data and your source code
 
-## Prerequisites
+## Quick Start
 
-- A [Sentry](https://sentry.io) account with API access
-- An auth token with scopes: `project:read`, `event:read`, `issue:read`
-- Your organization and project slugs
+**Install the skill in 2 commands:**
 
-## Setup
+```bash
+# 1. Clone into your Claude Code skills directory
+git clone https://github.com/Harshil-Jani/sentry-debugging-skill.git ~/.claude/skills/sentry-debugging-skill
 
-1. **Set your Sentry auth token:**
+# 2. Export your Sentry token (add to your shell profile to persist)
+export SENTRY_AUTH_TOKEN="your-token-here"
+```
 
-   ```bash
-   export SENTRY_AUTH_TOKEN="your-token-here"
-   export SENTRY_ORG="your-org-slug"
-   export SENTRY_PROJECT="your-project-slug"
-   ```
+That's it. Claude Code will automatically pick up the skill.
 
-2. **Install the skill** in your Claude Code project:
+## Generating a Sentry Personal Token
 
-   Copy the skill files into your project's `.claude/skills/` directory or reference them from your Claude Code configuration.
+You need a **read-only** personal API token from Sentry. Here's how:
 
-## Files
+1. Go to **Settings > Account > API > Personal Tokens** in your Sentry dashboard
+2. Click **Create New Token**
+3. Give it only **read** permissions:
+   - `project:read`
+   - `event:read`
+   - `issue:read`
+4. Copy the generated token
 
-| File | Description |
-|------|-------------|
-| `SKILL.md` | Skill metadata and description for Claude Code |
-| `sentry-debugger.skill` | Core skill definition with workflows and debugging patterns |
-| `sentry-api.md` | Sentry API reference (endpoints, query syntax, response structures) |
-| `sentry_debug.py` | Standalone Python CLI for fetching Sentry data |
+![Sentry Personal Token Setup](assets/sentry-personal-token.png)
+
+> **Security note:** Only grant read scopes. This skill never needs to modify your Sentry data.
+
+## Configuration
+
+Set these environment variables (add them to your `.bashrc` / `.zshrc`):
+
+```bash
+export SENTRY_AUTH_TOKEN="your-token-here"   # Required
+export SENTRY_ORG="your-org-slug"             # Optional default org
+export SENTRY_PROJECT="your-project-slug"     # Optional default project
+```
 
 ## Usage
 
@@ -70,6 +81,15 @@ The skill supports several investigation patterns:
 - **User-reported issues** — filter by user email or ID
 - **Error type filtering** — narrow down by `TypeError`, `500` status codes, etc.
 - **Time-based investigation** — scope to the last hour, day, or a custom date range
+
+## Files
+
+| File | Description |
+|------|-------------|
+| `SKILL.md` | Skill metadata and description for Claude Code |
+| `sentry-debugger.skill` | Core skill definition with workflows and debugging patterns |
+| `sentry-api.md` | Sentry API reference (endpoints, query syntax, response structures) |
+| `sentry_debug.py` | Standalone Python CLI for fetching Sentry data |
 
 ## License
 
