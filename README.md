@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/sentry-banner.png" alt="Sentry Debugging Skill" />
+</p>
+
 # Sentry Debugging Skill
 
 > Be a product engineer and unblock your teams by debugging production issues even faster with this skill running alongside your code.
