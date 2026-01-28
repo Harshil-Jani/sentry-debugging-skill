@@ -13,13 +13,20 @@ A [Claude Code](https://docs.anthropic.com/en/docs/claude-code) skill that conne
 
 ## Quick Start
 
-**Install the skill in 2 commands:**
+**Install the skill in 3 steps:**
 
 ```bash
-# 1. Clone into your Claude Code skills directory
-git clone https://github.com/Harshil-Jani/sentry-debugging-skill.git ~/.claude/skills/sentry-debugging-skill
+# Step 1: Create the skills directory
+mkdir -p ~/.claude/skills
+```
 
-# 2. Export your Sentry token (add to your shell profile to persist)
+```bash
+# Step 2: Clone this repo into the skills directory
+git clone https://github.com/Harshil-Jani/sentry-debugging-skill.git ~/.claude/skills/sentry-debugging-skill
+```
+
+```bash
+# Step 3: Export your Sentry token (add to your .bashrc/.zshrc to persist)
 export SENTRY_AUTH_TOKEN="your-token-here"
 ```
 
@@ -37,7 +44,9 @@ You need a **read-only** personal API token from Sentry. Here's how:
    - `issue:read`
 4. Copy the generated token
 
-![Sentry Personal Token Setup](assets/sentry-personal-token.png)
+![Create a new Sentry token](assets/sentry-create-token.png)
+
+![Set read-only permissions](assets/sentry-permissions.png)
 
 > **Security note:** Only grant read scopes. This skill never needs to modify your Sentry data.
 
